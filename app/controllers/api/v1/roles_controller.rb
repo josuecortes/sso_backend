@@ -8,19 +8,19 @@ module Api
       def index
         @roles = Role.all
         authorize Role
-        render json: { code: 200, message: 'Roles list fetched successfully.', roles: @roles }, status: :ok
+        render json: { code: 200, message: "Roles list fetched successfully.", roles: @roles }, status: :ok
       end
 
       def show
         authorize @role
-        render json: { code: 200, message: 'Role fetched.', role: @role }, status: :ok
+        render json: { code: 200, message: "Role fetched.", role: @role }, status: :ok
       end
 
       def create
         @role = Role.new(role_params)
         authorize @role
         if @role.save
-          render json: { code: 201, message: 'Role created.', role: @role }, status: :created
+          render json: { code: 201, message: "Role created.", role: @role }, status: :created
         else
           render json: { code: 422, errors: @role.errors.full_messages }, status: :unprocessable_entity
         end
@@ -29,7 +29,7 @@ module Api
       def update
         authorize @role
         if @role.update(role_params)
-          render json: { code: 200, message: 'Role updated.', role: @role }, status: :ok
+          render json: { code: 200, message: "Role updated.", role: @role }, status: :ok
         else
           render json: { code: 422, errors: @role.errors.full_messages }, status: :unprocessable_entity
         end
@@ -38,12 +38,12 @@ module Api
       def destroy
         authorize @role
         if @role.destroy
-          render json: { code: 200, message: 'Role deleted.' }, status: :ok
+          render json: { code: 200, message: "Role deleted." }, status: :ok
         else
-          render json: { 
-            code: 422, 
-            message: 'Failed to delete role.', 
-            errors: @role.errors.full_messages 
+          render json: {
+            code: 422,
+            message: "Failed to delete role.",
+            errors: @role.errors.full_messages
           }, status: :unprocessable_entity
         end
       end

@@ -9,12 +9,12 @@ module Api
         def respond_with(resource, _opts = {})
           if resource.persisted?
             render json: {
-              message: 'Signed up successfully.',
+              message: "Signed up successfully.",
               code: 201,
               user: UserSerializer.new(resource).serializable_hash[:data][:attributes]
             }, status: :created
           else
-            render json: { message: 'Sign up failed.', errors: resource.errors.full_messages }, status: :unprocessable_entity
+            render json: { message: "Sign up failed.", errors: resource.errors.full_messages }, status: :unprocessable_entity
           end
         end
 

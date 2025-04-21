@@ -8,7 +8,7 @@ module Api
       def index
         @assignments = UserRoleAssignment.includes(:role, :user)
         authorize UserRoleAssignment
-        render json: { code: 200, message: 'User role assignments fetched.', assignments: @assignments.as_json(include: [:role, :user]) }, status: :ok
+        render json: { code: 200, message: "User role assignments fetched.", assignments: @assignments.as_json(include: [ :role, :user ]) }, status: :ok
       end
 
       def create
@@ -19,7 +19,7 @@ module Api
         authorize @assignment
 
         if @assignment.save
-          render json: { code: 201, message: 'Role assigned to user.', assignment: @assignment }, status: :created
+          render json: { code: 201, message: "Role assigned to user.", assignment: @assignment }, status: :created
         else
           render json: { code: 422, errors: @assignment.errors.full_messages }, status: :unprocessable_entity
         end
@@ -28,7 +28,7 @@ module Api
       def destroy
         authorize @assignment
         @assignment.update(active: false, removed_at: Time.current)
-        render json: { code: 200, message: 'Role removed from user.', assignment: @assignment }, status: :ok
+        render json: { code: 200, message: "Role removed from user.", assignment: @assignment }, status: :ok
       end
 
       private

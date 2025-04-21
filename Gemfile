@@ -46,7 +46,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem 'devise'
-gem 'devise-jwt'
-gem 'jsonapi-serializer'
-gem 'pundit'
+gem "devise"
+gem "devise-jwt"
+gem "jsonapi-serializer"
+gem "pundit"

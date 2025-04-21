@@ -12,7 +12,7 @@ class RolePolicy < ApplicationPolicy
   end
 
   def update?
-    return false if record.name == 'master' && !user.has_active_role?("master")
+    return false if record.name == "master" && !user.has_active_role?("master")
     user.has_active_role?("administrador") || user.has_active_role?("master")
   end
 
