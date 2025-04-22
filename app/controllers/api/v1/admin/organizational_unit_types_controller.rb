@@ -2,17 +2,17 @@ module Api
   module V1
     module Admin
       class OrganizationalUnitTypesController < ApplicationController
-        before_action :set_type, only: [:show, :update, :destroy]
+        before_action :set_type, only: [ :show, :update, :destroy ]
 
         def index
-          authorize [:admin, OrganizationalUnitType]
+          authorize [ :admin, OrganizationalUnitType ]
 
           @types = OrganizationalUnitType.all
           render json: @types
         end
 
         def show
-          authorize [:admin, @type]
+          authorize [ :admin, @type ]
 
           render json: @type
         end
@@ -20,7 +20,7 @@ module Api
         def create
           @type = OrganizationalUnitType.new(organizational_unit_type_params)
 
-          authorize [:admin, @type]
+          authorize [ :admin, @type ]
           if @type.save
             render json: @type, status: :created
           else
@@ -29,7 +29,7 @@ module Api
         end
 
         def update
-          authorize [:admin, @type]
+          authorize [ :admin, @type ]
 
           if @type.update(organizational_unit_type_params)
             render json: @type
@@ -39,7 +39,7 @@ module Api
         end
 
         def destroy
-          authorize [:admin, @type]
+          authorize [ :admin, @type ]
 
           if @type.destroy
             render json: { code: 200, message: "Organizational unit type deleted." }, status: :ok

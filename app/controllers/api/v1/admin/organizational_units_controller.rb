@@ -2,25 +2,25 @@ module Api
   module V1
     module Admin
       class OrganizationalUnitsController < ApplicationController
-        before_action :set_unit, only: [:show, :update, :destroy]
-        
+        before_action :set_unit, only: [ :show, :update, :destroy ]
+
         def index
-          authorize [:admin, OrganizationalUnit]
+          authorize [ :admin, OrganizationalUnit ]
 
           @units = OrganizationalUnit.all
           render json: @units
         end
 
         def show
-          authorize [:admin, @unit]
+          authorize [ :admin, @unit ]
 
           render json: @unit
         end
 
         def create
           @unit = OrganizationalUnit.new(organizational_unit_params)
-          
-          authorize [:admin, @unit]
+
+          authorize [ :admin, @unit ]
           if @unit.save
             render json: @unit, status: :created
           else
@@ -29,7 +29,7 @@ module Api
         end
 
         def update
-          authorize [:admin, @unit]
+          authorize [ :admin, @unit ]
 
           if @unit.update(organizational_unit_params)
             render json: @unit
@@ -39,8 +39,8 @@ module Api
         end
 
         def destroy
-          authorize [:admin, @unit]
-          
+          authorize [ :admin, @unit ]
+
           if @unit.destroy
             render json: { code: 200, message: "Organizational unit deleted." }, status: :ok
           else
