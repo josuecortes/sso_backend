@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  sigla: MyString
+  active: false
+  parent_id: 1
+  organizational_unit_type: one
+  location_type: one
+  custom_fields: 
+
+two:
+  name: MyString
+  code: MyString
+  sigla: MyString
+  active: false
+  parent_id: 1
+  organizational_unit_type: two
+  location_type: two
+  custom_fields: 

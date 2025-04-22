@@ -29,6 +29,10 @@ Rails.application.routes.draw do
             patch :toggle_active, :reset_password
           end
         end
+
+        resources :organizational_units
+        resources :organizational_unit_types
+        resources :location_types
       end
     end
   end

@@ -10,9 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_20_022013) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_21_021344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "location_types", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "organizational_unit_types", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "organizational_units", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.string "sigla"
+    t.boolean "active"
+    t.bigint "parent_id"
+    t.bigint "organizational_unit_type_id", null: false
+    t.bigint "location_type_id", null: false
+    t.jsonb "custom_fields"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_type_id"], name: "index_organizational_units_on_location_type_id"
+    t.index ["organizational_unit_type_id"], name: "index_organizational_units_on_organizational_unit_type_id"
+    t.index ["parent_id"], name: "index_organizational_units_on_parent_id"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
@@ -56,6 +86,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_20_022013) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "organizational_units", "location_types"
+  add_foreign_key "organizational_units", "organizational_unit_types"
+  add_foreign_key "organizational_units", "organizational_units", column: "parent_id"
   add_foreign_key "user_role_assignments", "roles"
   add_foreign_key "user_role_assignments", "users"
   add_foreign_key "user_role_assignments", "users", column: "assigned_by_id"

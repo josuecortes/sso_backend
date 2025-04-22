@@ -1,6 +1,6 @@
-# SSO Backend - Secretaria de Estado
+# SSO Backend - SEED/AP
 
-Sistema de Autenticação e Autorização (SSO) desenvolvido para a Secretaria de Estado, fornecendo um serviço centralizado de gerenciamento de usuários e permissões.
+Sistema de Autenticação e Autorização (SSO) desenvolvido para a Secretaria de Estado da Educação do Amapá (SEED/AP), fornecendo um serviço centralizado de gerenciamento de usuários e permissões para os sistemas da secretaria.
 
 ## 🚀 Tecnologias Principais
 
@@ -35,7 +35,7 @@ Sistema de Autenticação e Autorização (SSO) desenvolvido para a Secretaria d
 
 1. Clone o repositório:
    ```bash
-   git clone [URL_DO_REPOSITÓRIO]
+   git clone https://github.com/josuecortes/sso_backend.git
    cd sso_backend
    ```
 
@@ -100,12 +100,20 @@ docker run -p 3000:3000 sso-backend
 
 ## 📝 Licença
 
-Este projeto é privado e destinado ao uso exclusivo da Secretaria de Estado.
+Este projeto é open source e está disponível sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 👥 Autores
 
-- [Seu Nome] - Desenvolvedor Principal
+- **Josué Cortes** - Desenvolvedor Principal
+  - GitHub: [@josuecortes](https://github.com/josuecortes)
+  - Email: [josuecortes@seed.ap.gov.br]
 
 ## 📞 Suporte
 
-Para suporte, entre em contato com a equipe de desenvolvimento.
+Para suporte ou dúvidas, entre em contato através do email: [seu-email@seed.ap.gov.br]
+
+## 🌐 Links Úteis
+
+- [SEED/AP - Site Oficial](https://www.seed.ap.gov.br)
+- [Documentação da API](docs/api.md)
+- [Guia de Contribuição](CONTRIBUTING.md)
