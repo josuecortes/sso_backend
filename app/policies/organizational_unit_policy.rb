@@ -1,4 +1,4 @@
-class Admin::LocationTypePolicy < ApplicationPolicy
+class OrganizationalUnitPolicy < ApplicationPolicy
   def index?
     admin?
   end

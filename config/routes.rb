@@ -22,18 +22,20 @@ Rails.application.routes.draw do
       resources :roles
 
       resources :user_role_assignments, only: [ :index, :create, :destroy ]
-
-      namespace :admin do
-        resources :users, only: [ :index, :show, :update ] do
-          member do
-            patch :toggle_active, :reset_password
-          end
+      
+      resources :users, only: [ :index, :show, :update ] do
+        member do
+          patch :toggle_active, :reset_password
         end
-
-        resources :organizational_units
-        resources :organizational_unit_types
-        resources :location_types
       end
+
+      resources :organizational_units
+      resources :organizational_unit_types
+      resources :location_types
+
+      resources :positions, only: [:index, :show, :create, :update, :destroy]
+      resources :user_position_assignments, only: [ :index, :create, :destroy ]
+      
     end
   end
 end

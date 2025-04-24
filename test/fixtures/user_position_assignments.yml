@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  position: one
+  organizational_unit: one
+  start_date: 2025-04-22
+  end_date: 2025-04-22
+  active: false
+
+two:
+  user: two
+  position: two
+  organizational_unit: two
+  start_date: 2025-04-22
+  end_date: 2025-04-22
+  active: false

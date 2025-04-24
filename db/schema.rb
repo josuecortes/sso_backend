@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_21_021344) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_22_180940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,11 +44,32 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_21_021344) do
     t.index ["parent_id"], name: "index_organizational_units_on_parent_id"
   end
 
+  create_table "positions", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_position_assignments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "position_id", null: false
+    t.bigint "organizational_unit_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organizational_unit_id"], name: "index_user_position_assignments_on_organizational_unit_id"
+    t.index ["position_id"], name: "index_user_position_assignments_on_position_id"
+    t.index ["user_id"], name: "index_user_position_assignments_on_user_id"
   end
 
   create_table "user_role_assignments", force: :cascade do |t|
@@ -81,15 +102,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_21_021344) do
     t.string "cpf"
     t.string "matricula"
     t.boolean "active", default: true
+    t.string "position_type"
+    t.bigint "position_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti"
+    t.index ["position_id"], name: "index_users_on_position_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "organizational_units", "location_types"
   add_foreign_key "organizational_units", "organizational_unit_types"
   add_foreign_key "organizational_units", "organizational_units", column: "parent_id"
+  add_foreign_key "user_position_assignments", "organizational_units"
+  add_foreign_key "user_position_assignments", "positions"
+  add_foreign_key "user_position_assignments", "users"
   add_foreign_key "user_role_assignments", "roles"
   add_foreign_key "user_role_assignments", "users"
   add_foreign_key "user_role_assignments", "users", column: "assigned_by_id"
+  add_foreign_key "users", "positions"
 end

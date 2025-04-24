@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :user_role_assignments, dependent: :destroy
   has_many :roles, through: :user_role_assignments
 
+  has_many :user_position_assignments, dependent: :destroy
+  has_many :positions, through: :user_position_assignments
+
   # Garantir que o jti seja gerado antes de salvar
   before_create :generate_jti
 
