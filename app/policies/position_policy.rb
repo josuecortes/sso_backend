@@ -6,7 +6,7 @@ class PositionPolicy < ApplicationPolicy
   def show?
     user.has_active_role?("administrador") || user.has_active_role?("master")
   end
-  
+
   def create?
     user.has_active_role?("administrador") || user.has_active_role?("master")
   end

@@ -6,9 +6,31 @@ module Api
       after_action :verify_authorized
 
       def index
-        @roles = Role.all
         authorize Role
-        render json: { code: 200, message: "Roles list fetched successfully.", roles: @roles }, status: :ok
+
+        roles = Role.search(params[:search])
+
+        if params[:sort_by].present? && Role.column_names.include?(params[:sort_by])
+          order_direction = params[:order] == "desc" ? :desc : :asc
+          roles = roles.order(params[:sort_by] => order_direction)
+        else
+          roles = roles.order(created_at: :desc)
+        end
+
+        @pagy, @roles = pagy(roles, items: (params[:per_page] || 20).to_i)
+
+        render json: {
+          code: 200,
+          message: "Roles list fetched successfully.",
+          roles: @roles,
+          pagination: {
+            current_page: @pagy.page,
+            next_page: @pagy.next,
+            prev_page: @pagy.prev,
+            total_pages: @pagy.pages,
+            total_count: @pagy.count
+          }
+        }, status: :ok
       end
 
       def show

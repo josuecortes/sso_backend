@@ -1,5 +1,5 @@
 module Api
-  module V1   
+  module V1
     class OrganizationalUnitsController < ApplicationController
       before_action :set_unit, only: [ :show, :update, :destroy ]
 
@@ -60,6 +60,6 @@ module Api
       def organizational_unit_params
         params.require(:organizational_unit).permit(:name, :code, :sigla, :active, :parent_id, :organizational_unit_type_id, :location_type_id)
       end
-    end 
+    end
   end
 end

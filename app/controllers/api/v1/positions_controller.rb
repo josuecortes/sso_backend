@@ -1,10 +1,33 @@
 class Api::V1::PositionsController < ApplicationController
-  before_action :set_position, only: [:show, :update, :destroy]
+  before_action :set_position, only: [ :show, :update, :destroy ]
   before_action :authorize_position
 
   def index
-    @positions = Position.all
-    render json: @positions
+    authorize Position
+
+    positions = Position.search(params[:search])
+
+    if params[:sort_by].present? && Position.column_names.include?(params[:sort_by])
+      order_direction = params[:order] == "desc" ? :desc : :asc
+      positions = positions.order(params[:sort_by] => order_direction)
+    else
+      positions = positions.order(created_at: :desc)
+    end
+
+    @pagy, @positions = pagy(positions, items: (params[:per_page] || 20).to_i)
+
+    render json: {
+      code: 200,
+      message: "Positions list fetched successfully.",
+      positions: @positions,
+      pagination: {
+        current_page: @pagy.page,
+        next_page: @pagy.next,
+        prev_page: @pagy.prev,
+        total_pages: @pagy.pages,
+        total_count: @pagy.count
+      }
+    }, status: :ok
   end
 
   def show

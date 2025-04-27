@@ -60,6 +60,6 @@ module Api
       def organizational_unit_type_params
         params.require(:organizational_unit_type).permit(:name, :description)
       end
-    end    
+    end
   end
 end

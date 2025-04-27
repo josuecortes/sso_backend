@@ -1,7 +1,7 @@
 class Api::V1::UserPositionAssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_assignment, only: %i[destroy]
-  
+
   def index
     @assignments = UserPositionAssignment.includes(:position, :user)
     authorize UserPositionAssignment
